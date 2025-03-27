@@ -7,18 +7,13 @@ class CrudRepository {
     }
 
     async create(data){
-        try{
+      
             console.log("body",data);
             console.log("inside repo routes");
             
             const response=await this.model.create(data);
             return response;
-        }
-        catch(error)
-        {
-            Logger.error('something went wrong in the curd repo: create');
-            throw error;
-        }
+       
     }
 
     async destroy(data){
