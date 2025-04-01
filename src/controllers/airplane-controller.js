@@ -43,7 +43,28 @@ async function getAirplanes(req,res){
 
 }
 
+async function getAirplane(req,res){
+    try{
+        console.log("see",req.params.id);
+        const airplane=await AirplaneService.getAirplane(req.params.id);
+        SuccessResponse.data=airplane;
+        console.log("at 51c",SuccessResponse);
+        
+        return res
+                .status(StatusCodes.OK)
+                .json(SuccessResponse)
+    }
+    catch(error){
+        ErrorResponse.error=error;
+        return res
+            .status(error.statusCode)
+            .json(ErrorResponse)
+    }
+}
+
+
 module.exports={
     createAirplane,
-    getAirplanes
+    getAirplanes,
+    getAirplane
 }
