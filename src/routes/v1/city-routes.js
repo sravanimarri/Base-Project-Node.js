@@ -8,4 +8,7 @@ router.post('/',
     CityMiddlewares.validateCreateRequest,
     CityController.createCity);
 
+router
+    .get('/',CityController.getCities);
+
 module.exports=router;
