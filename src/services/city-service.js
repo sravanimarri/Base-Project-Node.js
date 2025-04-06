@@ -34,10 +34,27 @@ async function getCities(){
     }
 }
 
+async function getCity(id){
+    try{
+        console.log('service',id);
+        
+    const city=await cityRepository.get(id);
+    console.log('serviceresult',city);
+    
+    return city;
+    }
+    catch(error){
+        if(error.statusCode=StatusCodes.NOT_FOUND){
+            throw new AppError('the city your are requested is not present',error.statusCode);
+        }
+        throw new AppError('unable to fetch all the city',StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
 
 
 
 module.exports={
 createCity,
-getCities
+getCities,
+getCity
 }
