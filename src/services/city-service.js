@@ -63,9 +63,27 @@ async function destroyCity(id){
     }
 }
 
+async function updateCity(id,data){
+    try{
+        console.log("here the body in service is",id);
+        console.log("here the  body in service  is",data);
+        
+        const city=await cityRepository.update(id,data);
+        console.log("the response body from service is is",city);
+        return city;
+    } catch(error) {
+        if(error.statusCode=StatusCodes.NOT_FOUND){
+            throw new AppError('the city you want to update is not present',error.statusCode);
+        }
+       throw new AppError('cannot delete the city',StatusCodes.INTERNAL_SERVER_ERROR); 
+    
+    }
+}
+
 module.exports={
 createCity,
 getCities,
 getCity,
-destroyCity
+destroyCity,
+updateCity
 }

@@ -5,6 +5,7 @@ const {StatusCodes}=require("http-status-codes")
 
 class CrudRepository {
     constructor(model){
+        console.log("here the model is",model);
         this.model=model;
     }
 
@@ -49,6 +50,8 @@ class CrudRepository {
     }
 
     async update(id,data){
+        console.log("here the request body in crud repository is",id);
+        console.log("here the request body in crud repository is",data);
             const response=await this.model.update(data,{
                 where:{
                     id:id

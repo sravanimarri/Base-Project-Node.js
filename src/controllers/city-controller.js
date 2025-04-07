@@ -70,9 +70,35 @@ async function destroyCity(req,res){
     }
 }
 
+async function updateCity(req,res){
+    try{
+        console.log("here the request body is",req);
+        console.log("here the request body is",req.params.id);
+        console.log("here the request body is",req.body.name);
+        
+        const city=await CityService.updateCity(req.params.id,{
+            name:req.body.name
+        });
+
+        console.log("here the response body from controller is",city);
+        SuccessResponse.data=city;
+        console.log("here the successresponse body from controller is",SuccessResponse);
+        return res
+                .status(StatusCodes.CREATED)
+                .json(SuccessResponse)
+    } catch(error){
+        ErrorResponse.error=error;
+        console.error("Error fetching city:", error);
+        return res
+        .status(error.statusCode)
+        .json(ErrorResponse);
+    }
+}
+
 module.exports={
     createCity,
     getCities,
     getCity,
-    destroyCity
+    destroyCity,
+    updateCity
 }
